@@ -18,8 +18,7 @@ class colDrop extends Tool {
  
 
   void clickTool() {
-    color c = get(mouseX, mouseY);
-    //println("Color picked: " + red(c) + ", " + green(c) + ", " + blue(c));
+    color c = get(mouseX, mouseY); // when clicked, it gets the colour of the pixel you're hovering over and selects that as current colour.
     currentColor = c;
     println("color selected: " + red(c) + ", " + green(c) + ", " + blue(c));
   }

@@ -46,7 +46,7 @@ class CropTool extends Tool {
         }
     }
     void applyTool() {
-        savedScreen = get(0, 200, width, height);
+        savedScreen = get(0, 200, width, height); // updates savedscreen
         topLeft = new PVector(mouseX, mouseY);
         isSelecting = true;
 
@@ -58,7 +58,7 @@ class CropTool extends Tool {
         
         // Check if it was just a click (no drag)
         if (topLeft != null && bottomRight != null) {
-            float dragDistance = dist(topLeft.x, topLeft.y, bottomRight.x, bottomRight.y);
+            float dragDistance = dist(topLeft.x, topLeft.y, bottomRight.x, bottomRight.y); // cancels the crop if the area is too small
             if (dragDistance < 5) {
                 println("Crop cancelled - no drag detected (just a click)");
                 // Restore the saved screen to undo any visual artifacts
@@ -71,7 +71,7 @@ class CropTool extends Tool {
                 return;
             }
         }
-        if (topLeft != null && bottomRight != null && savedScreen != null) {
+        if (topLeft != null && bottomRight != null && savedScreen != null) { // checks if crop is valid
           float x1 = min(topLeft.x, bottomRight.x);
           float y1 = min(topLeft.y, bottomRight.y)-200;
           float x2 = max(topLeft.x, bottomRight.x);
@@ -81,20 +81,20 @@ class CropTool extends Tool {
             PImage croppedImage = savedScreen.get(int(x1), int(y1), int(x2 - x1), int(y2 - y1));
             
             image(background,0,0, width, height);
-            image(croppedImage, tlbx, tlby, brbx, brby);
+            image(croppedImage, tlbx, tlby, brbx, brby); // shows the cropped image inside the editing box
             
             fullImage = croppedImage.copy();
             screen = get();
           }
           else { 
             println("cropped area is too small, crop cancelled.");
-            image(savedScreen,0,200);
+            image(savedScreen,0,200); // reverts back to savedscreen if the cropped area is too small
           }           
         }
         topLeft = null;
         bottomRight = null;
         savedScreen = null;
-        currentTool = new Tool(5);
+        currentTool = new Tool(5); // resets tool for next use after finished
 
     }
 }

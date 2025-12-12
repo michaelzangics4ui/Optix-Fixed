@@ -9,7 +9,7 @@ class Pencil extends Tool {
     
 
     void update() {
-        if (isMouseDragged) {
+        if (isMouseDragged) { // if mouse is dragged, it draws a line using the current colour selected and current size.
             pushStyle();
             stroke(currentColor);
             strokeWeight(toolSize);

@@ -1,6 +1,6 @@
 class Text extends Tool {
-    PVector textPosition;
-    int textSizeValue = 32;
+    PVector textPosition; // Stores where the text will be placed on canvas (where user clicks)
+    int textSizeValue = 32; // text size
     
     Text(float s) {
         super(s);

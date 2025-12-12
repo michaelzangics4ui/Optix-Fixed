@@ -15,10 +15,10 @@ boolean greyScaleActive;
 boolean greyScaleClicked;
 boolean contrastActive;
 boolean contrastClicked;
-int tlbx = 24;
-int tlby = 173;
-int brbx = 1181-tlbx;
-int brby = 645-tlby;
+int tlbx = 24; // stands for top left box x
+int tlby = 173; // stands for top left box y
+int brbx = 1181-tlbx; // stands for bottom right box x
+int brby = 645-tlby; // stands for bottom right box y       // these coordinates basically determine where the top right and bottom left of the photo editing area is
 PImage background;
 boolean dropStatus;
 
@@ -27,12 +27,12 @@ void setup() {
     createGUI();
     size(1200,675);
     background(255);
-    background = loadImage("Crop.jpg");
+    background = loadImage("Crop.jpg"); // loading UI background
     image(background,0,0, width, height);
-    currentTool = new Tool(1);
+    currentTool = new Tool(1); // setting current tool to null
     sample = loadImage("guy.jpg"); // LOAD PREFERRED FILE HERE
     lastScreen = sample.copy();
-    image(sample, tlbx, tlby, brbx, brby);
+    image(sample, tlbx, tlby, brbx, brby); // creates the image on the top left and bottom right of the editing box
     fullImage = get(tlbx, tlby, brbx, brby);
 
 
@@ -42,24 +42,30 @@ void setup() {
 
 void draw() {
 
-    if (greyScaleActive) {
+    if (greyScaleActive) { // if greyScaleActive is clicked, it launches greyscale command
      greyScale(); 
-     greyScaleActive = false;
+     greyScaleActive = false; // turns off greyScaleActive so it doesn't get repeatedly greyscaled
     }
-    if (contrastActive) {
+    if (contrastActive) { // if contrast is clicked, it launches contrast command
      contrast(64); 
-     contrastActive = false;
+     contrastActive = false; // turns off contrastActive so it doesn't get repeatedly contrasted
     }
     
+        // Refresh screen for color dropper preview and crop tool
+
     if (currentTool.type == "colDrop" || currentTool.type == "Crop" || dropStatus == true) {
         image(screen, 0, 0);
         dropStatus = false;
     }
     
+    // Save screen state unless crop tool is actively selecting
+
     if (currentTool.type != "Crop" || !((CropTool)currentTool).isSelecting) {
       screen = get();
 
     }
+
+    // Update current tool (draws, applies effects, etc.)
 
     if (currentTool != null) {
         currentTool.update();
@@ -74,15 +80,14 @@ void draw() {
     textSize(16);
     pushStyle();
     noStroke();
-    fill(#0a1929);
+    fill(#0a1929); // fills the background colour
     rect(width*0.868,height*0.190, 140, 20);
     rect(39,115,120,30);
-     // Covers the entire dropdown menu area
-    rect(40, 23, 120, 80);
-    rect(40, 103, 120, 60);
+    rect(40, 23, 120, 80); // covers the dropdown menu area so it disappears once clicked
+    rect(40, 103, 120, 60); // covers the slider area so no illusions of past slider values appear
     pushStyle();
     fill(255);
-    text("Current Tool: " + currentTool.type, width*0.868,height*0.207);
+    text("Current Tool: " + currentTool.type, width*0.868,height*0.207); // displays current tool in the corner
 
     //println(mouseX, mouseY);
     if (currentTool != null) {

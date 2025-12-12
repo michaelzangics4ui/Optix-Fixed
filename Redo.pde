@@ -1,5 +1,5 @@
 class Redo extends Tool {
-    Tool prev;
+    Tool prev; // Stores the previous tool to return to after redo
   
     Redo(float s, Tool p) {
         super(s);
@@ -8,10 +8,10 @@ class Redo extends Tool {
     }
 
     void update() {
-        if (currentScreen != null) {
-          image(background,0,0, width, height); 
-          image(currentScreen, 0, 0);
+        if (currentScreen != null) {         // Restore the screen state that was saved before undo
+          image(background,0,0, width, height); // Redraw UI background
+          image(currentScreen, 0, 0);// Restore the saved screen state
         }
-        currentTool = prev;
+        currentTool = prev; // switches back to previous tool
     }
 }

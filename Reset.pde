@@ -17,9 +17,12 @@ class Reset extends Tool {
         image(background,0,0, width, height);
 
         image(originalImage, tlbx, tlby, brbx, brby);
+        
+        // Reset all transformation counters to default
+
         rotationCount = 0;
         zoomCount = 0;
-        lastScreen = get(tlbx, tlby, brbx, brby);
+        lastScreen = get(tlbx, tlby, brbx, brby); // Save state for undo
         println("Image reset");
         
         // Switch back to default tool after reset

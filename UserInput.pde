@@ -14,11 +14,14 @@ void mouseDragged() {
    }
 
 void mouseReleased() {
-        isMouseDragged = false;
+        isMouseDragged = false; // Reset drag flag when mouse is released
+        // Call toolDone() for current tool if mouse is in editing area
         if (currentTool != null && mouseY > 180) {
             currentTool.toolDone();
         }
         bottomRight = new PVector(mouseX, mouseY);
+        
+        // Update fullImage after drawing with Pencil or Eraser
         if (currentTool.type == "Pencil" || currentTool.type == "Eraser") {
         fullImage = get(0, 200, width, height - 200);
       }
@@ -70,7 +73,6 @@ void keyPressed() {
 }
 
 void mousePressed() {
-    //println("Mouse clicked at: " + mouseX + ", " + mouseY);
     
     // checks if the mouse if clicked on the text box. if clicked, then turns off all keyboard shortcuts.
     if (mouseX >= 661 && mouseX <= 781 && mouseY >= 72 && mouseY <= 102) {
@@ -86,20 +88,16 @@ void mousePressed() {
         return; // Doesn't apply whatever the current tool is on the button interface.
     }
     
-    //  greyscale = new GCheckbox(this, 338, 78, 120, 20);
-
     
     if (clickedOnUI() == false) {
         
         if (currentTool != null) {
             lastScreen = get(tlbx, tlby, brbx, brby); // Save the state before drawing
-            //println(">>> Screen Saved (Valid Draw Action) <<<");
             
             currentTool.applyTool();
             topLeft = new PVector(mouseX, mouseY);
         }
     } else {
-        //println(">>> UI Click Detected - Save Skipped <<<");
     }
 }
 
@@ -114,6 +112,7 @@ boolean clickedOnUI() {
 }
 
 void mouseClicked() {
+      // Trigger clickTool() for tools that need single-click actions (like color dropper)
     if (currentTool != null && mouseY > 200) {
         currentTool.clickTool();
     }
