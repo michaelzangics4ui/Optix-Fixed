@@ -83,9 +83,9 @@ public void contrast_clicked(GCheckbox source, GEvent event) { //_CODE_:contrast
   contrastActive = contrast.isSelected();
 } //_CODE_:contrast:689614:
 
-public void schattmanify_clicked(GCheckbox source, GEvent event) { //_CODE_:schattmanify:402076:
-  println("checkbox1 - GCheckbox >> GEvent." + event + " @ " + millis());
-} //_CODE_:schattmanify:402076:
+// public void schattmanify_clicked(GCheckbox source, GEvent event) { //_CODE_:schattmanify:402076:
+//  println("checkbox1 - GCheckbox >> GEvent." + event + " @ " + millis());
+// } //_CODE_:schattmanify:402076:
 
 public void reset_clicked(GButton source, GEvent event) { //_CODE_:reset:994712:
   currentTool = new Reset(1);
@@ -146,12 +146,12 @@ public void createGUI(){
   contrast.setLocalColorScheme(GCScheme.SCHEME_11);
   contrast.setOpaque(false);
   contrast.addEventHandler(this, "contrast_clicked");
-  schattmanify = new GCheckbox(this, 556, 126, 237, 20);
-  schattmanify.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
-  schattmanify.setText("SCHATTMANIFY (FACE REQUIRED)");
-  schattmanify.setLocalColorScheme(GCScheme.SCHEME_9);
-  schattmanify.setOpaque(false);
-  schattmanify.addEventHandler(this, "schattmanify_clicked");
+  //schattmanify = new GCheckbox(this, 556, 126, 237, 20);
+  //schattmanify.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
+  //schattmanify.setText("SCHATTMANIFY (FACE REQUIRED)");
+  //schattmanify.setLocalColorScheme(GCScheme.SCHEME_9);
+  //schattmanify.setOpaque(false);
+  //schattmanify.addEventHandler(this, "schattmanify_clicked");
   reset = new GButton(this, 551, 65, 80, 30);
   reset.setText("RESET");
   reset.setLocalColorScheme(GCScheme.RED_SCHEME);
@@ -180,7 +180,8 @@ GButton undo;
 GButton redo; 
 GCheckbox greyscale; 
 GCheckbox contrast; 
-GCheckbox schattmanify; 
+// GCheckbox schattmanify; 
 GButton reset; 
 GTextField TEXT;
 GLabel myLabel;
+
